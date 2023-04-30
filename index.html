@@ -8,16 +8,24 @@
     <title>Document</title>
     <link rel="stylesheet" href="styles/style.css">
     <base target="_blank">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css"></head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
+</head>
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+<script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
 
 <body>
     <header>
         <a href="https://docs.hyperleaflet.dev/" class="title">
             go to hyperleaflet docs
         </a>
-        <i class="iconoir-open-in-window" style="color:white;font-size: 18px"></i>
+        <i class="iconoir-open-in-window icon" style="color:white"></i>
 
     </header>
 
@@ -28,24 +36,31 @@
         </a>
         <a href="https://github.com/cemrehancavdar/hyperleaflet" class="nav-item nav-item__github">
             View on Github
-            <i class="iconoir-github-circle" style="color:white; font-size: 18px;"></i>
-
+            <i class="iconoir-github-circle icon" style="color:white"></i>
         </a>
     </nav>
+
     <content>
         <span class="description">
             Hyperleaflet makes it easy to visualize your maps with Leaflet over HTML
-        </span> 
+        </span>
         <span>
             html attributes + some leafy magics = maps
         </span>
-        <pre><code id="import-code" class="language-html">
         </code></pre>
+        <div id="hyperleaflet-sample" class="hyperleaflet-sample">
+            <pre class="hyperleaflet-sample__code"><code id="hyperleaflet-code"></code>
+            </pre>
+            <div class="hyperleaflet-sample__map">
+                <div id="map"></div>
+            </div>
+        </div>
     </content>
     <footer></footer>
 
-    <script>hljs.highlightAll();</script>
+    <script>hljs.highlightAll(); hljs.initLineNumbersOnLoad();</script>
     <script src="scripts/main.js"></script>
+
 </body>
 
 </html>
