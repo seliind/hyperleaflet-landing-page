@@ -1,0 +1,79 @@
+@import "normalize.min.css";
+@import url('https://fonts.cdnfonts.com/css/inter');
+* {
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+:root {
+    --radius: 6px
+    
+}
+body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+ 
+header {
+    background-color: black;
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    width: 100%;
+}
+
+.title {
+    color: white;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+    width: 100%;
+    padding-inline: 10%;
+
+}
+.nav-item {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-item__logo {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: black;
+
+}
+.nav-item__github {
+    display: flex;
+    gap: 6px;
+
+    border-radius: var(--radius);
+    padding: 9px;
+
+    font-weight: 400;
+
+    color:white;
+    background-color: black;
+
+}
+
+content {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 20%;
+}
+.description {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+code {
+    border-radius: var(--radius);
+}
