@@ -1,9 +1,22 @@
 const hyperleafletCodeContainer = document.querySelector("#hyperleaflet-code")
+const importCodeContainer = document.querySelector("#import-code")
+
 const nextButton = document.querySelector("#next-step")
 const prevButton = document.querySelector("#prev-step")
 
 
-const shikiHighlighter = shiki.getHighlighter({theme: 'nord',  langs: ['html', 'javascript']})
+
+const importCode =
+	`<!-- import leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"
+<script src="https://unpkg.com/leaflet/dist/leaflet.js">
+
+<!-- import hyperleaflet -->
+<script defer src="https://www.unpkg.com/hyperleaflet@0.2.3"></script>
+`
+
+
+const shikiHighlighter = shiki.getHighlighter({ theme: 'nord', langs: ['html', 'javascript'] })
 let currentStep = 0
 
 const hyperleafletCodes = {
@@ -25,7 +38,7 @@ nextButton.addEventListener("click", () => {
 	nextStep()
 })
 
-function nextStep() {	
+function nextStep() {
 	shikiHighlighter.then(highlighter => {
 		const code = highlighter.codeToHtml(hyperleafletCodes[currentStep], { lang: 'html' })
 		hyperleafletCodeContainer.innerHTML = code
@@ -44,7 +57,12 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png
 }).addTo(map);
 
 
-document.addEventListener("DOMContentLoaded", function(event){
+document.addEventListener("DOMContentLoaded", function (event) {
 	nextStep()
-  });
-  
+
+	shikiHighlighter.then(highlighter => {
+		const code = highlighter.codeToHtml(importCode, { lang: 'html' })
+		importCodeContainer.innerHTML = code
+	})
+});
+
