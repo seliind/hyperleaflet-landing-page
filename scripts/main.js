@@ -1,6 +1,8 @@
 const hyperleafletCodeContainer = document.querySelector("#hyperleaflet-code")
 const nextButton = document.querySelector("#next-step")
 const prevButton = document.querySelector("#prev-step")
+
+
 const shikiHighlighter = shiki.getHighlighter({theme: 'nord',  langs: ['html', 'javascript']})
 let currentStep = 0
 
