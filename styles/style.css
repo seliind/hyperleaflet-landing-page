@@ -175,8 +175,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 8%;
-    padding-bottom: 0;
+    padding-top: 6rem;
 }
 
 .footer__image-container {
