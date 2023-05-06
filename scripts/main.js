@@ -1,20 +1,30 @@
-const hyperleafletCode = document.getElementById("hyperleaflet-code")
-const hyperleafletHTML = hljs.highlightAuto(
-`<div id="map"
- data-center="39.73, 39.99"
- data-zoom="5"
- ...
- >
- <div 
- data-tile="OpenStreetMap">
- </div>
- <div 
- data-tile="EsriWorldImagery">
- </div>
+const hyperleafletCodeContainer = document.getElementById("hyperleaflet-code")
+const hyperleafletHTMLCode = `
+<div id="map"
+data-center="39.73, 39.99"
+data-zoom="5"
+...
+>
+<div 
+data-tile="OpenStreetMap">
 </div>
-`).value
+<div 
+data-tile="EsriWorldImagery">
+</div>
+</div>
+`
 
-hyperleafletCode.innerHTML = hyperleafletHTML
+shiki
+.getHighlighter({
+	theme: 'nord'
+})
+.then(highlighter => {
+	const code = highlighter.codeToHtml(hyperleafletHTMLCode, { lang: 'html' })
+	hyperleafletCodeContainer.innerHTML = code
+})
+
+
+
 
 
 const map = L.map('map').setView([51.505, -0.09], 13);
