@@ -1,31 +1,37 @@
-const hyperleafletCodeContainer = document.getElementById("hyperleaflet-code")
-const hyperleafletHTMLCode = `
-<div id="map"
-data-center="39.73, 39.99"
-data-zoom="5"
-...
->
-<div 
-data-tile="OpenStreetMap">
-</div>
-<div 
-data-tile="EsriWorldImagery">
-</div>
-</div>
-`
+const hyperleafletCodeContainer = document.querySelector("#hyperleaflet-code")
+const nextButton = document.querySelector("#next-step")
+const prevButton = document.querySelector("#prev-step")
+const shikiHighlighter = shiki.getHighlighter({theme: 'nord',  langs: ['html', 'javascript']})
+let currentStep = 0
 
-shiki
-.getHighlighter({
-	theme: 'nord'
+const hyperleafletCodes = {
+	1: `<div id="map">`,
+	2: `<div id="map"
+	data-center="39.73, 39.99"
+	>
+
+	`,
+	3: `<div id="map"
+	data-center="39.73, 39.99"
+	data-zoom="5"
+	>
+	`
+}
+
+
+nextButton.addEventListener("click", () => {
+	nextStep()
 })
-.then(highlighter => {
-	const code = highlighter.codeToHtml(hyperleafletHTMLCode, { lang: 'html' })
-	hyperleafletCodeContainer.innerHTML = code
-})
 
+function nextStep() {	
+	shikiHighlighter.then(highlighter => {
+		const code = highlighter.codeToHtml(hyperleafletCodes[currentStep], { lang: 'html' })
+		hyperleafletCodeContainer.innerHTML = code
+	})
 
+	currentStep += 1
 
-
+}
 
 const map = L.map('map').setView([51.505, -0.09], 13);
 
@@ -35,3 +41,8 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png
 	maxZoom: 20
 }).addTo(map);
 
+
+document.addEventListener("DOMContentLoaded", function(event){
+	nextStep()
+  });
+  
