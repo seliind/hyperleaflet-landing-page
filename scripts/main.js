@@ -4,7 +4,11 @@ const importCodeContainer = document.querySelector("#import-code")
 const nextButton = document.querySelector("#next-step")
 const prevButton = document.querySelector("#prev-step")
 
-
+const map = L.map('map').setView([0, 0], 0)
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map)
 
 const importCode =
 	`<!-- import leaflet -->
@@ -16,45 +20,71 @@ const importCode =
 `
 
 
+
 const shikiHighlighter = shiki.getHighlighter({ theme: 'nord', langs: ['html', 'javascript'] })
-let currentStep = 0
-
-const hyperleafletCodes = {
-	1: `<div id="map">`,
-	2: `<div id="map"
-	data-center="39.73, 39.99"
-	>
-
-	`,
-	3: `<div id="map"
-	data-center="39.73, 39.99"
-	data-zoom="5"
-	>
-	`
-}
+let currentStep = -1
 
 
-nextButton.addEventListener("click", () => {
-	nextStep()
-})
+
+const hyperleafletCodes = [
+`<div id="map"></div>`,
+`<div id="map"
+data-zoom="5">
+</div>
+`,
+`<div id="map"
+data-zoom="5"
+data-center="39.73, 39.99">
+</div>
+`,
+`
+<div id="map"
+ data-zoom="5"
+ data-center="39.73, 39.99">
+  <div
+    data-tile="EsriWorldImagery"
+  ></div>
+</div>
+`
+]
+
+let prevActions = []
+const esriWorldImageryTile =  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
+
+
+const nextActions = [
+	() => { return () => { } },
+	() => { map.setZoom(5); return () => map.setZoom(0) },
+	() => { map.setView([39.73, 39.99]); return () => map.setView([0, 0]) },
+	() => {esriWorldImageryTile.addTo(map); return () => map.removeLayer(esriWorldImageryTile)  }
+]
+
+
+nextButton.addEventListener("click", nextStep)
+prevButton.addEventListener('click', prevStep)
 
 function nextStep() {
 	shikiHighlighter.then(highlighter => {
+		currentStep += 1
 		const code = highlighter.codeToHtml(hyperleafletCodes[currentStep], { lang: 'html' })
 		hyperleafletCodeContainer.innerHTML = code
+		const prevAction = nextActions[currentStep]()
+		prevActions.unshift(prevAction)
 	})
-
-	currentStep += 1
-
 }
 
-const map = L.map('map').setView([51.505, -0.09], 13);
+function prevStep() {
+	shikiHighlighter.then(highlighter => {
+		currentStep -= 1
+		const code = highlighter.codeToHtml(hyperleafletCodes[currentStep], { lang: 'html' })
+		hyperleafletCodeContainer.innerHTML = code
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-	subdomains: 'abcd',
-	maxZoom: 20
-}).addTo(map);
+		prevActions.shift()()
+
+	})
+}
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
