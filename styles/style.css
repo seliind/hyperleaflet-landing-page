@@ -8,10 +8,12 @@
     box-sizing: border-box;
 }
 
+
 code * {
     font-family: 'Source Code Pro', sans-serif;
     font-weight: 400;
     font-size: 13.6px;
+    
 }
 
 .line {
@@ -27,6 +29,7 @@ html {
 }
 
 body {
+    background-color: #ebeceb;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -99,6 +102,9 @@ content {
 
 .description {
     font-size: 24px;
+    line-height: 2.5rem;
+}
+.description__bold {
     font-weight: 700;
 }
 
@@ -212,6 +218,7 @@ footer {
     width: 80%;
     aspect-ratio: 5/2;
 
+    border-radius: var(--radius);
     background-size: cover;
     color: white;
     padding: 20px;
@@ -225,16 +232,11 @@ footer {
     --shadow-color: 0deg 0% 63%;
     box-shadow: 0px -0.2px 0.2px hsl(var(--shadow-color) / 0.21), 0px -1.1px 1.4px -0.2px hsl(var(--shadow-color) / 0.23), 0px -1.9px 2.4px -0.4px hsl(var(--shadow-color) / 0.25), 0px -2.9px 3.6px -0.7px hsl(var(--shadow-color) / 0.27), 0px -4.1px 5.1px -0.9px hsl(var(--shadow-color) / 0.29), -0.1px -5.9px 7.3px -1.1px hsl(var(--shadow-color) / 0.31), -0.1px -8.4px 10.4px -1.3px hsl(var(--shadow-color) / 0.33), -0.1px -11.8px 14.6px -1.5px hsl(var(--shadow-color) / 0.35), -0.2px -16.3px 20.2px -1.7px hsl(var(--shadow-color) / 0.37);
 
-    border: 16px solid white;
-    border-bottom: 0;
-    border-radius: var(--radius);
 }
 
 .footer__image-container:hover {
 
     transform: scale(1.02);
 
-    border: 16px solid white;
-    border-bottom: 0;
-    border-radius: var(--radius);
+
 }
